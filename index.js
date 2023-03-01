@@ -1,16 +1,13 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import express from 'express';
-import bodyparser from 'body-parser';
-import mongoose from 'mongoose';
-import AuthRoute from './routes/AuthRoute.js';
-import userRoute from './routes/userRoute.js';
-import postRoute from './routes/postRoute.js';
-import cors from 'cors';
-import UploadRoute from './routes/uploadFile.js'
-import chatRoute from './routes/ChatRoute.js';
-import messageRoute from './routes/MessageRoute.js';
+const dotenv = require('dotenv');
+const express = require('express') ;
+const mongoose = require('mongoose') ;
+const AuthRoute = require('./routes/AuthRoute.js') ;
+const userRoute = require('./routes/userRoute.js');
+const postRoute = require('./routes/postRoute.js') ;
+const cors = require('cors') ;
+const UploadRoute = require('./routes/uploadFile.js'); 
 
+dotenv.config();
 const port = process.env.PORT || 4000;
 
 const app = express();
@@ -29,12 +26,13 @@ mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log(`DB GOT CONNECTED`))
-.catch((error) => console.log(error));
-
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}..`)
-})
+    .then(() => {
+        console.log(`DB GOT CONNECTED`);
+        app.listen(port, () => {
+            console.log(`Server is listening on port ${port}..`);
+        });
+    })
+    .catch((error) => console.log(error));
 
 // routes
 
@@ -46,5 +44,3 @@ app.use('/auth', AuthRoute);
 app.use('/user', userRoute);
 app.use('/post', postRoute);
 app.use('/upload', UploadRoute);
-app.use('/chat', chatRoute);
-app.use('/message', messageRoute);

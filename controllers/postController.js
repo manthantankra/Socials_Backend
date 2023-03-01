@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
-import Post from "../models/post.js";
-import User from "../models/user.js";
+const mongoose = require('mongoose');
+const Post = require("../models/post.js");
+const User = require("../models/user.js");
 
 // create new post
-export const createPost = async (req, res) => {
+exports.createPost = async (req, res) => {
     const newPost = new Post(req.body);
 
     try {
@@ -19,7 +19,7 @@ export const createPost = async (req, res) => {
 
 // Get a post
 
-export const getPost = async (req, res) => {
+exports.getPost = async (req, res) => {
     const id = req.params.id
 
     try {
@@ -34,7 +34,7 @@ export const getPost = async (req, res) => {
 }
 
 // update a post
-export const updatePost = async (req, res) => {
+exports.updatePost = async (req, res) => {
     const postId = req.params.id;
     const { userId } = req.body;
 
@@ -53,7 +53,7 @@ export const updatePost = async (req, res) => {
 }
 
 // Delete a post
-export const deletePost = async (req, res) => {
+exports.deletePost = async (req, res) => {
     const id = req.params.id;
     const { userId } = req.body;
 
@@ -73,7 +73,7 @@ export const deletePost = async (req, res) => {
 };
 
 // like/dislike a post
-export const likePost = async (req, res) => {
+exports.likePost = async (req, res) => {
     const id = req.params.id;
     const { userId } = req.body;
 
@@ -93,7 +93,7 @@ export const likePost = async (req, res) => {
 };
 
 // Get Timeline Posts
-export const getTimelinePosts = async (req, res) => {
+exports.getTimelinePosts = async (req, res) => {
     const userId = req.params.id;
 
     try {

@@ -1,13 +1,13 @@
-import User from "../models/user.js";
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+const User = require("../models/user.js");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // Get All Users
-export const getAllUsers = async (req, res) => {
+exports.getAllUser = async (req, res) => {
     try {
         let users = await User.find({});
         users = users.map((user) => {
-            const { password, ...otherDetails } = user._doc
+            const { password, ...otherDetails } = user._doc;
             return otherDetails;
         })
         res.status(200).json(users);
@@ -17,8 +17,7 @@ export const getAllUsers = async (req, res) => {
 };
 
 // Get a user 
-
-export const getUser = async (req, res) => {
+exports.getUser = async (req, res) => {
     const id = req.params.id;
     try {
         const user = await User.findById(id);
@@ -38,7 +37,7 @@ export const getUser = async (req, res) => {
 
 // Update a user 
 
-export const updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {
     const id = req.params.id;
 
     const { _id, currentUserAdminStatus, password } = req.body;
@@ -79,7 +78,7 @@ export const updateUser = async (req, res) => {
 
 // Delete a user
 
-export const deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
     const id = req.params.id;
 
     const { _id, currentUserAdminStatus } = req.body;
@@ -93,13 +92,13 @@ export const deleteUser = async (req, res) => {
         }
     }
     else {
-        res.status(403).json("Access Denies! you can only delete your own profile");
+        res.status(403).json("Access Denied! you can only delete your own profile");
     }
 }
 
 // Follow a user
 
-export const followUser = async (req, res) => {
+exports.followUser = async (req, res) => {
     const id = req.params.id; // User who should be follow
 
     const { _id } = req.body; //user who wants to follow 
@@ -129,7 +128,7 @@ export const followUser = async (req, res) => {
 
 // unfollow a user
 
-export const unfollowUser = async (req, res) => {
+exports.unfollowUser = async (req, res) => {
     const id = req.params.id; // User who should be follow
 
     const { _id } = req.body; //user who wants to follow 

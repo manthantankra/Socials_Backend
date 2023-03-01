@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -38,9 +38,9 @@ const userSchema = new mongoose.Schema({
     followers: [],
     following: []
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+    }
 )
 
-const User = mongoose.model('User', userSchema);
-
-export default User;
+module.exports = mongoose.model('User', userSchema);
